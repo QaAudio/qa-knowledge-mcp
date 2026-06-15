@@ -25,7 +25,7 @@ npm test
 
 - **Never** `console.log` to stdout — breaks MCP stdio.
 - Use `console.error` for diagnostics.
-- Index must exist in Qdrant before tools return useful results (`qa-knowledge-index` in qa-knowledge repo).
+- Index must exist in Qdrant before tools return useful results (`qa-knowledge-index sync` in qa-knowledge repo).
 
 ## Local dev with corpus
 

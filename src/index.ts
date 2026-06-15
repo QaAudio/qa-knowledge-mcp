@@ -7,7 +7,7 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { configFromEnv } from "@quantumaudio/qa-knowledge";
+import { configFromEnv, ensureEmbeddedQdrant } from "@quantumaudio/qa-knowledge";
 import { registerTools } from "./tools.js";
 
 export const INSTRUCTIONS = `Semantic documentation search for QuantumAudio (Ableton Extensions SDK, skills, repo docs).
@@ -20,7 +20,8 @@ The Ableton Extensions SDK guides, API reference, examples, and type surface are
 search_knowledge returns relevant sections from the reference corpus; use get_knowledge_chunk for
 full text. (Inside QuantumAgent, the built-in invoke_skill tool returns full skill bodies.)
 
-Index must exist: npm run knowledge:index (requires Qdrant + embedding provider).`;
+Index must exist: npm run knowledge:sync (or knowledge:embedding then knowledge:index). Requires embedded Qdrant for index step.
+Prepare Qdrant binary once: npm run qdrant:prepare`;
 
 const server = new McpServer(
   { name: "qa-knowledge-mcp", version: "0.0.1" },
@@ -30,6 +31,7 @@ const server = new McpServer(
 registerTools(server);
 
 async function main() {
+  await ensureEmbeddedQdrant();
   const config = configFromEnv();
   const transport = new StdioServerTransport();
   await server.connect(transport);

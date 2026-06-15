@@ -16,14 +16,14 @@ Use these before guessing SDK APIs when working with [qa-ableton-mcp](https://gi
 ## Prerequisites
 
 1. **Clone [qa-knowledge](https://github.com/QaAudio/qa-knowledge)** (or install `@quantumaudio/qa-knowledge` and point `KNOWLEDGE_ROOT` at a corpus checkout).
-2. **Qdrant** running (default `http://127.0.0.1:6333`).
+2. **Embedded Qdrant** — managed locally on `http://127.0.0.1:6433`. Prepare once: `npm run qdrant:prepare` (from QuantumAudio monorepo root).
 3. **Embedding provider** — Ollama or OpenRouter (see env table below).
 4. **Indexed corpus** — from the qa-knowledge repo:
 
    ```bash
    cd /path/to/qa-knowledge
    npm ci && npm run build
-   npx qa-knowledge-index
+   npx qa-knowledge-index sync
    ```
 
 ## Install & build
@@ -51,7 +51,7 @@ Inherited from `@quantumaudio/qa-knowledge` (`configFromEnv`):
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `QDRANT_URL` | `http://127.0.0.1:6333` | Qdrant |
+| `QA_QDRANT_DATA_DIR` | `{userData}/qdrant` | Embedded Qdrant data dir |
 | `KNOWLEDGE_COLLECTION` | `qa-core` | Collection |
 | `KNOWLEDGE_ROOT` | `docs/knowledge` | Corpus (relative to qa-knowledge repo root when run from there) |
 | `EMBEDDING_PROVIDER` | `openrouter` | `ollama` \| `openrouter` |
@@ -72,7 +72,7 @@ Add to `.cursor/mcp.json` (paths adjusted to your machine):
       "command": "node",
       "args": ["/path/to/qa-knowledge-mcp/dist/index.js"],
       "env": {
-        "QDRANT_URL": "http://127.0.0.1:6333",
+        "QA_QDRANT_DATA_DIR": "/path/to/quantum-agent-userData/qdrant",
         "EMBEDDING_PROVIDER": "openrouter",
         "EMBEDDING_MODEL": "openai/text-embedding-3-small",
         "EMBEDDING_DIMENSIONS": "1536",

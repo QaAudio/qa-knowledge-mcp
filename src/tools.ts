@@ -150,9 +150,9 @@ export function registerTools(server: McpServer): void {
 
                 hint: filtered
 
-                  ? "Search failed with filters. Retry the same query WITHOUT `skill_name`/`source_type` (the collection may lack payload indexes). If it still fails, ensure Qdrant is running and re-run `npm run knowledge:index`."
+                  ? "Search failed with filters. Retry the same query WITHOUT `skill_name`/`source_type` (the collection may lack payload indexes). If it still fails, run `npm run qdrant:prepare` and re-run `npm run knowledge:sync`."
 
-                  : "Ensure Qdrant is running and run `npm run knowledge:index`.",
+                  : "Run `npm run qdrant:prepare`, then `npm run knowledge:sync` (or `knowledge:index` if sidecars already exist).",
 
               }),
 
