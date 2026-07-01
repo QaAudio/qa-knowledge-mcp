@@ -1,5 +1,7 @@
 # qa-knowledge-mcp — Agent Guide
 
+> **Deprecated in QuantumAudio monorepo.** Use `apps/qa-library-mcp` for `search_knowledge` / `get_knowledge_chunk`. Keep `@quantumaudio/qa-knowledge` for indexing.
+
 MCP stdio server: `search_knowledge`, `get_knowledge_chunk`. Depends on `@quantumaudio/qa-knowledge`.
 
 ## Layout
@@ -33,8 +35,6 @@ Clone [qa-knowledge](https://github.com/QaAudio/qa-knowledge) alongside this rep
 
 ## Changing tools
 
-1. Edit `src/tools.ts` + tests
-2. Update README tool table
-3. Keep Zod input schemas strict; return `source_id` paths agents can open
+Prefer changing [`apps/qa-library-mcp/docs/knowledge-mcp-contract.md`](../qa-library-mcp/docs/knowledge-mcp-contract.md) and the bridge in `qa-library-mcp` for monorepo consumers.
 
 Security / publish: `.cursor/skills/security-guidelines/SKILL.md`.
